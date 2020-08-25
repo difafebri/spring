@@ -22,7 +22,7 @@ public class KartuKreditController {
 	KartuKreditDaoImpl kk;
 
 	@RequestMapping(value="/kartukredit",method = RequestMethod.GET)
-	public ModelAndView getKartuKredit() {
+	public ModelAndView getKartuKredit(HttpSession session) {
 		return new ModelAndView("kartukredit", "command", new KartuKredit());
 		// command is a reserved request attribute name, now use <form> tag to show
 		// object data

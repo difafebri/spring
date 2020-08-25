@@ -20,7 +20,7 @@ public class PembelianController {
 	PembelianDaoImpl beli;
 	
 	@RequestMapping("/pembelian")
-	public ModelAndView getPembelianPage() {
+	public ModelAndView getPembelianPage(HttpSession session) {
 		return new ModelAndView("pembelian", "command", new Pembelian());
 	}
 	 

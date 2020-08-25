@@ -19,7 +19,7 @@ public class PembayaranController {
 	PembayaranDaoImpl bayar;
 	
 	@RequestMapping("/pembayaran")
-	public ModelAndView getPembayaranPage() {
+	public ModelAndView getPembayaranPage(HttpSession session) {
 		System.out.println("INI PEMBAYARAN");
 		return new ModelAndView("pembayaran", "command", new Pembayaran());
 	}

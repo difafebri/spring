@@ -20,7 +20,7 @@ public class AdminController {
 	//private HttpSession session;
 	
 	@RequestMapping("/administrasi")
-	public ModelAndView getAdministrasi() {
+	public ModelAndView getAdministrasi(HttpSession session) {
 		return new ModelAndView("administrasi","command", new User());
 	}	
 	
@@ -44,10 +44,5 @@ public class AdminController {
 		System.out.println("TEST ganti password INI DAH LEWAT");
 		session.setAttribute("pw", user.getPw());
 		return getGantipwPage(session);
-	}
-	
-	@RequestMapping("success")
-	public ModelAndView getSuccessPage() {
-		return new ModelAndView("success");
 	}
 }

@@ -3,6 +3,7 @@ package com.bca.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,12 +39,9 @@ public class LoginController {
 		System.out.println(udi.validateUser(login));
 		if (udi.validateUser(login)!=null){
 			System.out.println("logged in");
-			ModelAndView mv = new ModelAndView();
-			mv.setViewName("success");
 			session.setAttribute("user", (String) login.getUsername());
 			session.setAttribute("pw", (String) login.getPw());
-			this.session=session;
-			return mv;
+			return new ModelAndView("success");
 		} else {
 			System.out.println("NOT logged in");
 			ModelAndView mv = new ModelAndView("redirect:login","command",new User());
@@ -57,5 +55,13 @@ public class LoginController {
 		session.removeAttribute("user");
 		session.removeAttribute("pw");
 		return new ModelAndView("redirect:login", "command", new User());
+	}
+	
+	@RequestMapping("/success")
+	public ModelAndView sukses(HttpSession session) {
+		String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
+		session.setAttribute("username", currentUserName);
+		System.out.println(session.toString());
+		return new ModelAndView("success");
 	}
 }
